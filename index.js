@@ -8,6 +8,12 @@ document.getElementById('sum').addEventListener('click', function () {
 document.getElementById('sub').addEventListener('click', function () {
   screen.value = subtract(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
 })
+document.getElementById('mul').addEventListener('click', function () {
+  screen.value = multiply(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
+})
+document.getElementById('div').addEventListener('click', function () {
+  screen.value = divide(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
+})
 document.getElementById('clean').addEventListener('click', function () {
   firstNumber.value = " "
   secondNumber.value = " "

@@ -8,6 +8,10 @@ document.getElementById('sum').addEventListener('click', function () {
 document.getElementById('sub').addEventListener('click', function () {
   screen.value = subtract(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
 })
+document.getElementById('clean').addEventListener('click', function () {
+  firstNumber.value = " "
+  secondNumber.value = " "
+})
 
 function sum(x, y) {
   return x + y
@@ -16,6 +20,7 @@ function sum(x, y) {
 function subtract(x, y) {
   return x - y
 }
+
 function multiply(x, y) {
   if (x == 0 || y == 0) {
     return 0

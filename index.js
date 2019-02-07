@@ -11,6 +11,7 @@ document.getElementById('sub').addEventListener('click', function () {
 document.getElementById('clean').addEventListener('click', function () {
   firstNumber.value = " "
   secondNumber.value = " "
+  screen.value = ' '
 })
 
 function sum(x, y) {

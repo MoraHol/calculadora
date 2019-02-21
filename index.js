@@ -19,6 +19,9 @@ document.getElementById('clean').addEventListener('click', function () {
   secondNumber.value = " "
   screen.value = ' '
 })
+document.getElementById('calculator').addEventListener('click', function () {
+  calculator(document.getElementById('expression').value)
+})
 
 function sum(x, y) {
   return x + y
@@ -41,4 +44,15 @@ function divide(x, y) {
     return 'error'
   }
   return x / y
+}
+
+function calculator(expression) {
+  let xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById('test').innerHTML = this.responseText
+    }
+  }
+  xhttp.open('GET', 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(expression), true)
+  xhttp.send()
 }

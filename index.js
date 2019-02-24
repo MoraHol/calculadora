@@ -1,58 +1,39 @@
-let screen = document.getElementById('screen')
-let firstNumber = document.getElementById('firstNumber')
-let secondNumber = document.getElementById('secondNumber')
+// Get all the keys from document
+var keys = document.querySelectorAll('#calculator span')
+// Add onclick event to all the keys and perform operations
+for (var i = 0; i < keys.length; i++) {
+  keys[i].onclick = function () {
+    // Get the input and button values
+    var input = document.querySelector('.screen')
+    var inputVal = input.innerHTML
+    var btnVal = this.innerHTML
 
-document.getElementById('sum').addEventListener('click', function () {
-  screen.value = sum(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
-})
-document.getElementById('sub').addEventListener('click', function () {
-  screen.value = subtract(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
-})
-document.getElementById('mul').addEventListener('click', function () {
-  screen.value = multiply(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
-})
-document.getElementById('div').addEventListener('click', function () {
-  screen.value = divide(parseFloat(firstNumber.value), parseFloat(secondNumber.value))
-})
-document.getElementById('clean').addEventListener('click', function () {
-  firstNumber.value = " "
-  secondNumber.value = " "
-  screen.value = ' '
-})
-document.getElementById('calculator').addEventListener('click', function () {
-  calculator(document.getElementById('expression').value)
-})
+    // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
+    // If clear key is pressed, erase everything
+    if (btnVal == 'C') {
+      input.innerHTML = ''
+    }
 
-function sum(x, y) {
-  return x + y
-}
-
-function subtract(x, y) {
-  return x - y
-}
-
-function multiply(x, y) {
-  if (x == 0 || y == 0) {
-    return 0
-  } else {
-    return x * y
+    // If eval key is pressed, calculate and display the result
+    else if (btnVal == '=') {
+      var equation = inputVal;
+      calculate(equation, input)
+    } else {
+      input.innerHTML += btnVal
+    }
   }
 }
 
-function divide(x, y) {
-  if (y == 0) {
-    return 'error'
-  }
-  return x / y
-}
-
-function calculator(expression) {
+function calculate(equation, input) {
   let xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
-      document.getElementById('test').innerHTML = this.responseText
+      input.innerHTML = this.responseText
+    }
+    if (this.status === 400) {
+      input.innerHTML = 'eror: ha escrito mal la expresion'
     }
   }
-  xhttp.open('GET', 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(expression), true)
+  xhttp.open("GET", 'http://api.mathjs.org/v4/?expr=' + encodeURIComponent(equation), false)
   xhttp.send()
 }

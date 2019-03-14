@@ -36,7 +36,12 @@ function calculate(equation, input) {
   let xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function () {
     if (this.readyState === 4 && this.status === 200) {
-      input.innerHTML = this.responseText
+      if(this.responseText == "Infinity"){
+        input.innerHTML = "error: no se puede dividir por cero"
+      }else{
+        input.innerHTML = this.responseText
+      }
+      
     }
     if (this.status === 400) {
       input.innerHTML = 'eror: ha escrito mal la expresion'
